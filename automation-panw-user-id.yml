@@ -1,32 +1,8 @@
-args:
-- auto: PREDEFINED
-  name: command
-  predefined:
-  - db-add-ip
-  - db-add-mac
-  - db-delete-ip
-  - db-delete-mac
-  - db-list-ip
-  - db-list-mac
-  - dhcp-mapping
-  - find-best-match
-  - fw-get-mappings
-  - push-manual-mapping
-  - push-static-ip-mappings
-- name: hostname
-- name: ip
-- name: mac
-- name: timeout
-- name: user
 commonfields:
   id: a2ed60f7-de0c-4001-8c01-09cdf7cb21da
-  version: -1
-dockerimage: demisto/python3:3.8.5.10845
-enabled: true
+  version: 124
+vcShouldKeepItemLegacyProdMachine: false
 name: panw-user-id
-pswd: ""
-runas: DBotWeakRole
-runonce: false
 script: |-
   import json
   import re
@@ -156,10 +132,12 @@ script: |-
           cmd += "<all/></ip-user-mapping></user></show>"
       res = demisto.executeCommand('panorama', { "type" : "op", "cmd": cmd } )
       data = res[0]['Contents']['response']['result']
-      demisto.results( {'ContentsFormat': formats['table'],
-          'Type': entryTypes['note'],
-          'Contents': data['entry'] } )
-
+      if data:
+          demisto.results( {'ContentsFormat': formats['table'],
+              'Type': entryTypes['note'],
+              'Contents': data['entry'] } )
+      else:
+          demisto.results("No results found")
 
   def get_list(name):
       mac_list = demisto.executeCommand("getList", {"listName": name})
@@ -228,7 +206,32 @@ script: |-
           push_static_ip_mappings(timeout)
 
   main()
+type: python
+tags: []
+enabled: true
+args:
+- name: command
+  auto: PREDEFINED
+  predefined:
+  - db-add-ip
+  - db-add-mac
+  - db-delete-ip
+  - db-delete-mac
+  - db-list-ip
+  - db-list-mac
+  - dhcp-mapping
+  - find-best-match
+  - fw-get-mappings
+  - push-manual-mapping
+  - push-static-ip-mappings
+- name: hostname
+- name: ip
+- name: mac
+- name: timeout
+- name: user
 scripttarget: 0
 subtype: python3
-tags: []
-type: python
+pswd: ""
+runonce: false
+dockerimage: demisto/python3:3.8.5.10845
+runas: DBotWeakRole
