@@ -1,0 +1,15 @@
+{
+	"data": "{\"10.0.0.1\": \"switch\"}",
+	"fromServerVersion": "",
+	"id": "user_id_ip_mappings",
+	"itemVersion": "",
+	"locked": false,
+	"name": "user_id_ip_mappings",
+	"nameLocked": false,
+	"packID": "",
+	"sortValues": null,
+	"system": false,
+	"toServerVersion": "",
+	"truncated": false,
+	"version": -1
+}

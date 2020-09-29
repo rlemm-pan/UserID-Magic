@@ -1,0 +1,15 @@
+{
+	"data": "{ \"AA:BB:CC:DD:EE:FF\": \"test-system\"}",
+	"fromServerVersion": "",
+	"id": "user_id_mac_mappings",
+	"itemVersion": "",
+	"locked": false,
+	"name": "user_id_mac_mappings",
+	"nameLocked": false,
+	"packID": "",
+	"sortValues": null,
+	"system": false,
+	"toServerVersion": "",
+	"truncated": false,
+	"version": -1
+}
